@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1843d885ee61431d89a1630e4f7ae3e7, type: 3}
+  m_Name: Main
+  m_EditorClassIdentifier: 
+  levelKey: Main
+  enemySpawners:
+  - id: SpawnMarker-0a163d3a-f0df-4e4e-81b8-9f7e0ce504ec
+    monsterTypeId: 0
+    position: {x: 0, y: 0, z: 0}
+  - id: Main-969522b7-2b03-476d-ad87-cc6c6978d9ea
+    monsterTypeId: 10
+    position: {x: 4.74, y: 0, z: -3.42}
+  - id: Main-037203f2-d5c7-417e-85b2-92643701cd36
+    monsterTypeId: 0
+    position: {x: -4.83, y: 0, z: 11.11}
+  initPlayerPosition: {x: 10.78, y: 1.24, z: 4.7}
