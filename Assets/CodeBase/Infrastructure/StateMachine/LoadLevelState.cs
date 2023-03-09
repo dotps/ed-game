@@ -78,8 +78,11 @@ namespace CodeBase.Infrastructure.StateMachine
             _levelStaticData = _staticDataService.GetLevelData(sceneName);
         }
 
-        private void InitUI() => 
+        private void InitUI()
+        {
             _uiFactory.CreateUIContainer();
+            _uiFactory.CreateMainWindow();
+        }
 
         private void InitDroppedLoot() => 
             _gameFactory.CreateDroppedLoot();

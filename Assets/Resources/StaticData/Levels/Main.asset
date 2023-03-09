@@ -13,14 +13,5 @@ MonoBehaviour:
   m_Name: Main
   m_EditorClassIdentifier: 
   levelKey: Main
-  enemySpawners:
-  - id: SpawnMarker-0a163d3a-f0df-4e4e-81b8-9f7e0ce504ec
-    monsterTypeId: 0
-    position: {x: 0, y: 0, z: 0}
-  - id: Main-969522b7-2b03-476d-ad87-cc6c6978d9ea
-    monsterTypeId: 10
-    position: {x: 4.74, y: 0, z: -3.42}
-  - id: Main-037203f2-d5c7-417e-85b2-92643701cd36
-    monsterTypeId: 0
-    position: {x: -4.83, y: 0, z: 11.11}
-  initPlayerPosition: {x: 10.78, y: 1.24, z: 4.7}
+  enemySpawners: []
+  initPlayerPosition: {x: 0, y: 0, z: 0}

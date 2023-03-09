@@ -4,7 +4,6 @@ using CodeBase.Services.Progress;
 using CodeBase.StaticData;
 using CodeBase.StaticData.Windows;
 using CodeBase.UI.Services.Windows;
-using CodeBase.UI.Windows;
 using CodeBase.UI.Windows.Shop;
 using UnityEngine;
 
@@ -36,5 +35,12 @@ namespace CodeBase.UI.Services.Factory
 
         public void CreateUIContainer() =>
             _ui = _assets.LoadAndInstantiate(AssetPath.UIPath).transform;
+
+        public void CreateMainWindow()
+        {
+            WindowConfig config = _staticData.GetWindowConfig(WindowId.Shop);
+            ShopWindow window = Object.Instantiate(config.prefab, _ui) as ShopWindow;
+            window.Construct(_adService, _progressService);
+        }
     }
 }
