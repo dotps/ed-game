@@ -8,11 +8,11 @@ namespace CodeBase.Infrastructure.StateMachine
     public class LoadProgressState : IState
     {
         private readonly GameStateMachine _stateMachine;
-        private readonly IStorageProgressService _progressService;
+        private readonly IProgressService _progressService;
         private readonly ISaveLoadService _saveLoadService;
         private PlayerProgress _playerProgress;
 
-        public LoadProgressState(GameStateMachine stateMachine, IStorageProgressService progressService, ISaveLoadService saveLoadService)
+        public LoadProgressState(GameStateMachine stateMachine, IProgressService progressService, ISaveLoadService saveLoadService)
         {
             _stateMachine = stateMachine;
             _progressService = progressService;

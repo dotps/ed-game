@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1843d885ee61431d89a1630e4f7ae3e7, type: 3}
   m_Name: Graveyard
   m_EditorClassIdentifier: 
-  levelKey: Main
+  levelKey: Graveyard
   enemySpawners:
   - id: SpawnMarker-0a163d3a-f0df-4e4e-81b8-9f7e0ce504ec
     monsterTypeId: 0

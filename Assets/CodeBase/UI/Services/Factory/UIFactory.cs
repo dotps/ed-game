@@ -14,12 +14,12 @@ namespace CodeBase.UI.Services.Factory
     {
         private readonly IAssetProvider _assets;
         private readonly IStaticDataService _staticData;
-        private readonly IStorageProgressService _progressService;
+        private readonly IProgressService _progressService;
         private readonly IAdService _adService;
         
         private Transform _ui;
 
-        public UIFactory(IAssetProvider assets, IStaticDataService staticData, IStorageProgressService progressService, IAdService adService)
+        public UIFactory(IAssetProvider assets, IStaticDataService staticData, IProgressService progressService, IAdService adService)
         {
             _assets = assets;
             _staticData = staticData;

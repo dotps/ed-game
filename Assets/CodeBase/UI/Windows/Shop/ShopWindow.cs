@@ -10,7 +10,7 @@ namespace CodeBase.UI.Windows.Shop
         [SerializeField] private TMP_Text _moneyText;
         [SerializeField] private RewardedAdItem _adItem;
 
-        public void Construct(IAdService adService, IStorageProgressService progressService)
+        public void Construct(IAdService adService, IProgressService progressService)
         {
             base.Construct(progressService);
             _adItem.Construct(adService, progressService);

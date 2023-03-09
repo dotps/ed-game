@@ -25,13 +25,13 @@ namespace CodeBase.Infrastructure.StateMachine
                     sceneLoader,
                     loadingCurtain, 
                     serviceLocator.GetSingleInstance<IGameFactory>(), 
-                    serviceLocator.GetSingleInstance<IStorageProgressService>(), 
+                    serviceLocator.GetSingleInstance<IProgressService>(), 
                     serviceLocator.GetSingleInstance<IStaticDataService>(),
                     serviceLocator.GetSingleInstance<IUIFactory>()
                 ),
                 [typeof(LoadProgressState)] = new LoadProgressState(
                     this, 
-                    serviceLocator.GetSingleInstance<IStorageProgressService>(), 
+                    serviceLocator.GetSingleInstance<IProgressService>(), 
                     serviceLocator.GetSingleInstance<ISaveLoadService>()
                 ),
                 [typeof(GameLoopState)] = new GameLoopState(this) 

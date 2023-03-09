@@ -44,23 +44,23 @@ namespace CodeBase.Infrastructure.StateMachine
             _serviceLocator.RegisterSingleInstance<IGameStateMachine>(_stateMachine);
             _serviceLocator.RegisterSingleInstance<IInputService>(GetInputService());
             _serviceLocator.RegisterSingleInstance<IAssetProvider>(new AssetProvider());
-            _serviceLocator.RegisterSingleInstance<IStorageProgressService>(new StorageProgressService());
+            _serviceLocator.RegisterSingleInstance<IProgressService>(new ProgressService());
             
             _serviceLocator.RegisterSingleInstance<IUIFactory>(new UIFactory(
                 _serviceLocator.GetSingleInstance<IAssetProvider>(),
                 _serviceLocator.GetSingleInstance<IStaticDataService>(),
-                _serviceLocator.GetSingleInstance<IStorageProgressService>(), _serviceLocator.GetSingleInstance<IAdService>()));
+                _serviceLocator.GetSingleInstance<IProgressService>(), _serviceLocator.GetSingleInstance<IAdService>()));
             _serviceLocator.RegisterSingleInstance<IWindowService>(new WindowService(_serviceLocator.GetSingleInstance<IUIFactory>()));
             
             _serviceLocator.RegisterSingleInstance<IGameFactory>(new GameFactory(
                 _serviceLocator.GetSingleInstance<IAssetProvider>(), 
                 _serviceLocator.GetSingleInstance<IStaticDataService>(), 
-                _serviceLocator.GetSingleInstance<IStorageProgressService>(), 
+                _serviceLocator.GetSingleInstance<IProgressService>(), 
                 _serviceLocator.GetSingleInstance<IWindowService>()
             ));
             
             _serviceLocator.RegisterSingleInstance<ISaveLoadService>(new SaveLoadService(
-                _serviceLocator.GetSingleInstance<IStorageProgressService>(), 
+                _serviceLocator.GetSingleInstance<IProgressService>(), 
                 _serviceLocator.GetSingleInstance<IGameFactory>()
             ));
         }

@@ -22,10 +22,10 @@ namespace CodeBase.Services.Factory
 
         private readonly IAssetProvider _assets;
         private readonly IStaticDataService _staticData;
-        private readonly IStorageProgressService _progressService;
+        private readonly IProgressService _progressService;
         private readonly IWindowService _windowService;
 
-        public GameFactory(IAssetProvider assets, IStaticDataService staticData, IStorageProgressService progressService, IWindowService windowService)
+        public GameFactory(IAssetProvider assets, IStaticDataService staticData, IProgressService progressService, IWindowService windowService)
         {
             _assets = assets;
             _staticData = staticData;

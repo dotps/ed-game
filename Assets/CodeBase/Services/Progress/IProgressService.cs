@@ -2,7 +2,7 @@ using CodeBase.Data;
 
 namespace CodeBase.Services.Progress
 {
-    public interface IStorageProgressService : IService
+    public interface IProgressService : IService
     {
         PlayerProgress Progress { get; set; }
     }

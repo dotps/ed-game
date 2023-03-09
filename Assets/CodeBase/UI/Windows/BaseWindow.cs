@@ -8,10 +8,10 @@ namespace CodeBase.UI.Windows
     public abstract class BaseWindow : MonoBehaviour
     {
         [SerializeField] private Button _closeButton;
-        protected IStorageProgressService progressService;
+        protected IProgressService progressService;
         protected PlayerProgress Progress => progressService.Progress;
 
-        public void Construct(IStorageProgressService progressService) =>
+        public void Construct(IProgressService progressService) =>
             this.progressService = progressService;
 
         private void Awake() => 

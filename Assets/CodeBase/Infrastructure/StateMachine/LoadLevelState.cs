@@ -19,12 +19,12 @@ namespace CodeBase.Infrastructure.StateMachine
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingCurtain _loadingCurtain;
         private readonly IGameFactory _gameFactory;
-        private readonly IStorageProgressService _progressService;
+        private readonly IProgressService _progressService;
         private readonly IStaticDataService _staticDataService;
         private readonly IUIFactory _uiFactory;
         private LevelStaticData _levelStaticData;
 
-        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IGameFactory gameFactory, IStorageProgressService progressService, IStaticDataService staticDataService, IUIFactory uiFactory)
+        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IGameFactory gameFactory, IProgressService progressService, IStaticDataService staticDataService, IUIFactory uiFactory)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;

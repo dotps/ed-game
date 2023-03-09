@@ -9,10 +9,10 @@ namespace CodeBase.Services.SaveLoad
     {
         private const string ProgressKey = "Progress";
         
-        private readonly IStorageProgressService _playerProgress;
+        private readonly IProgressService _playerProgress;
         private readonly IGameFactory _gameFactory;
 
-        public SaveLoadService(IStorageProgressService progressService, IGameFactory gameFactory)
+        public SaveLoadService(IProgressService progressService, IGameFactory gameFactory)
         {
             _playerProgress = progressService;
             _gameFactory = gameFactory;

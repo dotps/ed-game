@@ -13,9 +13,9 @@ namespace CodeBase.UI.Windows.Shop
         [SerializeField] private GameObject[] _inactiveAdObjects;
         
         private IAdService _adService;
-        private IStorageProgressService _progressService;
+        private IProgressService _progressService;
 
-        public void Construct(IAdService adService, IStorageProgressService progressService)
+        public void Construct(IAdService adService, IProgressService progressService)
         {
             _adService = adService;
             _progressService = progressService;
