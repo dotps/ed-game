@@ -45,7 +45,7 @@ namespace CodeBase.UI.Services.Factory
         {
             WindowConfig config = _staticData.GetWindowConfig(WindowId.Main);
             MainWindow window = Object.Instantiate(config.prefab, _ui) as MainWindow;
-            window.Construct(_progressService, this);
+            window.Construct(_progressService);
             
             InitOpenWindowButton(window);
         }
