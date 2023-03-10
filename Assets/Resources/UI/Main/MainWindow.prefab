@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 788876480414819948}
   - component: {fileID: 788876480414819951}
-  - component: {fileID: 1895486027102176613}
+  - component: {fileID: -3720580803241111620}
   m_Layer: 5
   m_Name: MainWindow
   m_TagString: Untagged
@@ -48,7 +48,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788876480414819949}
   m_CullTransparentMesh: 1
---- !u!114 &1895486027102176613
+--- !u!114 &-3720580803241111620
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,10 +60,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29bb078cb0b38b840b1c3e93ea4166ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _closeButton: {fileID: 0}
   _title: MAIN
   _titleGameObject: {fileID: 5924897419996614996}
-  _worldsButton: {fileID: 0}
+  _closeButton: {fileID: 0}
+  _worldsButton: {fileID: 2760785660565110934}
 --- !u!1 &788876481372970904
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: WORDS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -284,7 +284,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 160, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7194615836266339048
 CanvasRenderer:
@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 2760785660565110934}
-  _windowId: 2
+  _windowId: 3
 --- !u!1001 &4437510458693339849
 PrefabInstance:
   m_ObjectHideFlags: 0

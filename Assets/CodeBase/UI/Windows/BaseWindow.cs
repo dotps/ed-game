@@ -1,5 +1,6 @@
 using CodeBase.Data;
 using CodeBase.Services.Progress;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,8 @@ namespace CodeBase.UI.Windows
 {
     public abstract class BaseWindow : MonoBehaviour
     {
+        [SerializeField] private string _title;
+        [SerializeField] private TMP_Text _titleGameObject;
         [SerializeField] private Button _closeButton;
         protected IProgressService progressService;
         protected PlayerProgress Progress => progressService.Progress;
@@ -29,9 +32,15 @@ namespace CodeBase.UI.Windows
             SubscribeUpdates();
         }
 
-        protected virtual void Init() {}
+        protected virtual void Init()
+        {
+            UpdateTitleText();
+        }
         protected virtual void SubscribeUpdates() {}
         protected virtual void UnSubscribeUpdates() {}
+        
+        private void UpdateTitleText() =>
+            _titleGameObject.text = _title;
 
         private void OnDestroy()
         {

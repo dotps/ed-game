@@ -18,6 +18,7 @@ namespace CodeBase.UI.Windows.Shop
         
         protected override void Init()
         {
+            base.Init();
             _adItem.Init();
             UpdateMoneyText();
         }

@@ -38,48 +38,50 @@ namespace CodeBase.Infrastructure.StateMachine
 
         private void RegisterServices()
         {
-            RegisterStaticDataService();
-            RegisterAdService();
+            IStaticDataService staticData = RegisterStaticDataService();
+            IAdService adService = RegisterAdService();
             
             _serviceLocator.RegisterSingleInstance<IGameStateMachine>(_stateMachine);
             _serviceLocator.RegisterSingleInstance<IInputService>(GetInputService());
-            _serviceLocator.RegisterSingleInstance<IAssetProvider>(new AssetProvider());
-            _serviceLocator.RegisterSingleInstance<IProgressService>(new ProgressService());
             
-            _serviceLocator.RegisterSingleInstance<IUIFactory>(new UIFactory(
-                _serviceLocator.GetSingleInstance<IAssetProvider>(),
-                _serviceLocator.GetSingleInstance<IStaticDataService>(),
-                _serviceLocator.GetSingleInstance<IProgressService>(), 
-                _serviceLocator.GetSingleInstance<IAdService>(),
+            IAssetProvider assetProvider = _serviceLocator.RegisterSingleInstance<IAssetProvider>(new AssetProvider());
+            IProgressService progressService = _serviceLocator.RegisterSingleInstance<IProgressService>(new ProgressService());
+            
+            IUIFactory uiFactory = _serviceLocator.RegisterSingleInstance<IUIFactory>(new UIFactory(
+                assetProvider,
+                staticData,
+                progressService, 
+                adService
             ));
+
+            IWindowService windowService = _serviceLocator.RegisterSingleInstance<IWindowService>(new WindowService(uiFactory));
+            uiFactory.Construct(windowService);
             
-            _serviceLocator.RegisterSingleInstance<IWindowService>(new WindowService(_serviceLocator.GetSingleInstance<IUIFactory>()));
-            
-            _serviceLocator.RegisterSingleInstance<IGameFactory>(new GameFactory(
-                _serviceLocator.GetSingleInstance<IAssetProvider>(), 
-                _serviceLocator.GetSingleInstance<IStaticDataService>(), 
-                _serviceLocator.GetSingleInstance<IProgressService>(), 
-                _serviceLocator.GetSingleInstance<IWindowService>()
+            IGameFactory gameFactory = _serviceLocator.RegisterSingleInstance<IGameFactory>(new GameFactory(
+                assetProvider, 
+                staticData, 
+                progressService, 
+                windowService
             ));
             
             _serviceLocator.RegisterSingleInstance<ISaveLoadService>(new SaveLoadService(
-                _serviceLocator.GetSingleInstance<IProgressService>(), 
-                _serviceLocator.GetSingleInstance<IGameFactory>()
+                progressService, 
+                gameFactory
             ));
         }
 
-        private void RegisterAdService()
+        private IAdService RegisterAdService()
         {
             var adService = new AdService();
             adService.Init();
-            _serviceLocator.RegisterSingleInstance<IAdService>(adService);
+            return _serviceLocator.RegisterSingleInstance<IAdService>(adService);
         }
 
-        private void RegisterStaticDataService()
+        private IStaticDataService RegisterStaticDataService()
         {
             IStaticDataService staticData = new StaticDataService();
             staticData.LoadResources();
-            _serviceLocator.RegisterSingleInstance<IStaticDataService>(staticData);
+            return _serviceLocator.RegisterSingleInstance<IStaticDataService>(staticData);
         }
 
         public void Exit()

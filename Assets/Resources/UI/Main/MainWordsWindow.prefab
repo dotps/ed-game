@@ -548,9 +548,9 @@ GameObject:
   m_Component:
   - component: {fileID: 788876480414819948}
   - component: {fileID: 788876480414819951}
-  - component: {fileID: 2283797237444680006}
+  - component: {fileID: 186344847910499151}
   m_Layer: 5
-  m_Name: ShopWindow
+  m_Name: MainWordsWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -586,7 +586,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788876480414819949}
   m_CullTransparentMesh: 1
---- !u!114 &2283797237444680006
+--- !u!114 &186344847910499151
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -595,14 +595,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 788876480414819949}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dae0e64cefa43109ef1da80802181e4, type: 3}
+  m_Script: {fileID: 11500000, guid: 21dd4092505483e4c90b3df88893afe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: GOOD SHOP
+  _title: WORDS
   _titleGameObject: {fileID: 788876481411158867}
   _closeButton: {fileID: 788876479719869289}
-  _moneyText: {fileID: 4894078725708711300}
-  _adItem: {fileID: 1412845441180714178}
+  _wordsButton: {fileID: 0}
 --- !u!1 &788876480617750985
 GameObject:
   m_ObjectHideFlags: 0

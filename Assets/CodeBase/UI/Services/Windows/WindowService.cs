@@ -24,7 +24,7 @@ namespace CodeBase.UI.Services.Windows
                     _uiFactory.CreateMainWindow();
                     break;
                 case WindowId.MainWords:
-                    _uiFactory.CreateMainWords();
+                    _uiFactory.CreateMainWordsWindow();
                     break;
             }
         }

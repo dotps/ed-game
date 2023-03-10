@@ -5,7 +5,10 @@ namespace CodeBase.Services
         private static ServiceLocator _instance;
         public static ServiceLocator Instance => _instance ?? (_instance = new ServiceLocator());
 
-        public void RegisterSingleInstance<TService>(TService implementation) where TService : IService => 
+        // public void RegisterSingleInstance<TService>(TService implementation) where TService : IService => 
+            // Implementation<TService>.ServiceInstance = implementation;
+        
+        public TService RegisterSingleInstance<TService>(TService implementation) where TService : IService => 
             Implementation<TService>.ServiceInstance = implementation;
 
         public TService GetSingleInstance<TService>() where TService : IService => 

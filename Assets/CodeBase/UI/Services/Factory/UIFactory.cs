@@ -1,10 +1,12 @@
 using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Services;
 using CodeBase.Services.Ad;
 using CodeBase.Services.Progress;
 using CodeBase.StaticData;
 using CodeBase.StaticData.Windows;
 using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Windows;
+using CodeBase.UI.Windows;
 using CodeBase.UI.Windows.Main;
 using CodeBase.UI.Windows.Shop;
 using UnityEngine;
@@ -17,17 +19,16 @@ namespace CodeBase.UI.Services.Factory
         private readonly IStaticDataService _staticData;
         private readonly IProgressService _progressService;
         private readonly IAdService _adService;
-        private readonly IWindowService _windowService;
+        private IWindowService _windowService;
 
         private Transform _ui;
 
-        public UIFactory(IAssetProvider assets, IStaticDataService staticData, IProgressService progressService, IAdService adService, IWindowService windowService)
+        public UIFactory(IAssetProvider assets, IStaticDataService staticData, IProgressService progressService, IAdService adService)
         {
             _assets = assets;
             _staticData = staticData;
             _progressService = progressService;
             _adService = adService;
-            _windowService = windowService;
         }
 
         public void CreateShop()
@@ -45,13 +46,26 @@ namespace CodeBase.UI.Services.Factory
             WindowConfig config = _staticData.GetWindowConfig(WindowId.Main);
             MainWindow window = Object.Instantiate(config.prefab, _ui) as MainWindow;
             window.Construct(_progressService, this);
+            
+            InitOpenWindowButton(window);
+        }
+
+        public void CreateMainWordsWindow()
+        {
+            WindowConfig config = _staticData.GetWindowConfig(WindowId.MainWords);
+            MainWordsWindow window = Object.Instantiate(config.prefab, _ui) as MainWordsWindow;
+            window.Construct(_progressService);
+            
+            InitOpenWindowButton(window);
+        }
+
+        private void InitOpenWindowButton(BaseWindow window)
+        {
             foreach (OpenWindowButton button in window.GetComponentsInChildren<OpenWindowButton>())
                 button.Construct(_windowService);
         }
 
-        public void CreateMainWords()
-        {
-            
-        }
+        public void Construct(IWindowService windowService) => 
+            _windowService = windowService;
     }
 }

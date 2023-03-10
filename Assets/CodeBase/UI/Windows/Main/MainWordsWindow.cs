@@ -9,31 +9,14 @@ using UnityEngine.UI;
 
 namespace CodeBase.UI.Windows.Main
 {
-    public class MainWindow : BaseWindow
+    public class MainWordsWindow : BaseWindow
     {
-        [SerializeField] private Button _worldsButton;
-        
         private UIFactory _uiFactory;
 
-        public void Construct(IProgressService progressService, UIFactory uiFactory)
+        public void Construct(IProgressService progressService)
         {
             base.Construct(progressService);
-            _uiFactory = uiFactory;
         }
-        
-        protected override void Init()
-        {
-            base.Init();
-        }
-
-        protected override void OnAwake()
-        {
-            base.OnAwake();
-            // _worldsButton.onClick.AddListener(OpenWordsWindow);
-        }
-
-        private void OpenWordsWindow() =>
-            _uiFactory.CreateMainWordsWindow();
 
         protected override void SubscribeUpdates()
         {
