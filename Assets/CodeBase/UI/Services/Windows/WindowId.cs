@@ -4,6 +4,7 @@ namespace CodeBase.UI.Services.Windows
     {
         Unknown,
         Shop,
-        Main
+        Main,
+        MainWords
     }
 }

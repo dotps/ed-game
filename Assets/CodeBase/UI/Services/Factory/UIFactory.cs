@@ -3,6 +3,7 @@ using CodeBase.Services.Ad;
 using CodeBase.Services.Progress;
 using CodeBase.StaticData;
 using CodeBase.StaticData.Windows;
+using CodeBase.UI.Elements;
 using CodeBase.UI.Services.Windows;
 using CodeBase.UI.Windows.Main;
 using CodeBase.UI.Windows.Shop;
@@ -16,15 +17,17 @@ namespace CodeBase.UI.Services.Factory
         private readonly IStaticDataService _staticData;
         private readonly IProgressService _progressService;
         private readonly IAdService _adService;
-        
+        private readonly IWindowService _windowService;
+
         private Transform _ui;
 
-        public UIFactory(IAssetProvider assets, IStaticDataService staticData, IProgressService progressService, IAdService adService)
+        public UIFactory(IAssetProvider assets, IStaticDataService staticData, IProgressService progressService, IAdService adService, IWindowService windowService)
         {
             _assets = assets;
             _staticData = staticData;
             _progressService = progressService;
             _adService = adService;
+            _windowService = windowService;
         }
 
         public void CreateShop()
@@ -41,7 +44,14 @@ namespace CodeBase.UI.Services.Factory
         {
             WindowConfig config = _staticData.GetWindowConfig(WindowId.Main);
             MainWindow window = Object.Instantiate(config.prefab, _ui) as MainWindow;
-            window.Construct(_progressService);
+            window.Construct(_progressService, this);
+            foreach (OpenWindowButton button in window.GetComponentsInChildren<OpenWindowButton>())
+                button.Construct(_windowService);
+        }
+
+        public void CreateMainWords()
+        {
+            
         }
     }
 }

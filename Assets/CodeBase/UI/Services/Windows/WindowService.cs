@@ -20,6 +20,12 @@ namespace CodeBase.UI.Services.Windows
                 case WindowId.Shop:
                     _uiFactory.CreateShop();
                     break;
+                case WindowId.Main:
+                    _uiFactory.CreateMainWindow();
+                    break;
+                case WindowId.MainWords:
+                    _uiFactory.CreateMainWords();
+                    break;
             }
         }
     }

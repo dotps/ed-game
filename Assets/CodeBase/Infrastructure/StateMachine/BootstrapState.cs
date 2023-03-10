@@ -49,7 +49,10 @@ namespace CodeBase.Infrastructure.StateMachine
             _serviceLocator.RegisterSingleInstance<IUIFactory>(new UIFactory(
                 _serviceLocator.GetSingleInstance<IAssetProvider>(),
                 _serviceLocator.GetSingleInstance<IStaticDataService>(),
-                _serviceLocator.GetSingleInstance<IProgressService>(), _serviceLocator.GetSingleInstance<IAdService>()));
+                _serviceLocator.GetSingleInstance<IProgressService>(), 
+                _serviceLocator.GetSingleInstance<IAdService>(),
+            ));
+            
             _serviceLocator.RegisterSingleInstance<IWindowService>(new WindowService(_serviceLocator.GetSingleInstance<IUIFactory>()));
             
             _serviceLocator.RegisterSingleInstance<IGameFactory>(new GameFactory(
