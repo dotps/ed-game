@@ -5,6 +5,7 @@ namespace CodeBase.UI.Services.Windows
         Unknown,
         Shop,
         Main,
-        MainWords
+        Words,
+        AddWord
     }
 }

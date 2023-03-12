@@ -23,8 +23,11 @@ namespace CodeBase.UI.Services.Windows
                 case WindowId.Main:
                     _uiFactory.CreateMainWindow();
                     break;
-                case WindowId.MainWords:
-                    _uiFactory.CreateMainWordsWindow();
+                case WindowId.Words:
+                    _uiFactory.CreateWordsWindow();
+                    break;
+                case WindowId.AddWord:
+                    _uiFactory.CreateAddWordWindow();
                     break;
             }
         }

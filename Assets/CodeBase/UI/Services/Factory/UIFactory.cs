@@ -50,10 +50,19 @@ namespace CodeBase.UI.Services.Factory
             InitOpenWindowButton(window);
         }
 
-        public void CreateMainWordsWindow()
+        public void CreateWordsWindow()
         {
-            WindowConfig config = _staticData.GetWindowConfig(WindowId.MainWords);
-            MainWordsWindow window = Object.Instantiate(config.prefab, _ui) as MainWordsWindow;
+            WindowConfig config = _staticData.GetWindowConfig(WindowId.Words);
+            WordsWindow window = Object.Instantiate(config.prefab, _ui) as WordsWindow;
+            window.Construct(_progressService);
+            
+            InitOpenWindowButton(window);
+        }
+
+        public void CreateAddWordWindow()
+        {
+            WindowConfig config = _staticData.GetWindowConfig(WindowId.AddWord);
+            AddWordWindow window = Object.Instantiate(config.prefab, _ui) as AddWordWindow;
             window.Construct(_progressService);
             
             InitOpenWindowButton(window);

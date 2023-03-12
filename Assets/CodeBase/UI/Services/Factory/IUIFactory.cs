@@ -10,6 +10,7 @@ namespace CodeBase.UI.Services.Factory
         void CreateShop();
         void CreateUIContainer();
         void CreateMainWindow();
-        void CreateMainWordsWindow();
+        void CreateWordsWindow();
+        void CreateAddWordWindow();
     }
 }

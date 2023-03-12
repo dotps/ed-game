@@ -9,10 +9,8 @@ using UnityEngine.UI;
 
 namespace CodeBase.UI.Windows.Main
 {
-    public class MainWordsWindow : BaseWindow
+    public class WordsWindow : BaseWindow
     {
-        private UIFactory _uiFactory;
-
         public void Construct(IProgressService progressService)
         {
             base.Construct(progressService);
