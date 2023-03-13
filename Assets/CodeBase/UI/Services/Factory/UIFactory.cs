@@ -57,7 +57,7 @@ namespace CodeBase.UI.Services.Factory
         {
             WindowConfig config = _staticData.GetWindowConfig(WindowId.Words);
             WordsWindow window = Object.Instantiate(config.prefab, _ui) as WordsWindow;
-            window.Construct(_progressService);
+            window.Construct(_progressService, _wordService);
             
             InitOpenWindowButton(window);
         }

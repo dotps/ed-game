@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeBase.Data;
 using CodeBase.Data.Words;
 using CodeBase.Services.Progress;
 using CodeBase.Services.Words;
@@ -42,9 +43,14 @@ namespace CodeBase.UI.Windows.Main
                 _wordTextSpeech.text
             );
 
+            var words = new WordsList();
+            words.items.Add(word);
+            
+            Debug.Log(words.ToJson());
+            
             if (_wordService.TryAdd(word))
             {
-                //
+                Hide();
             }
             else
             {

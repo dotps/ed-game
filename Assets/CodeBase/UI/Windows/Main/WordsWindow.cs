@@ -1,5 +1,6 @@
 using CodeBase.Services.Ad;
 using CodeBase.Services.Progress;
+using CodeBase.Services.Words;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 using CodeBase.UI.Windows.Shop;
@@ -11,20 +12,24 @@ namespace CodeBase.UI.Windows.Main
 {
     public class WordsWindow : BaseWindow
     {
-        public void Construct(IProgressService progressService)
+        private IWordService _wordService;
+
+        public void Construct(IProgressService progressService, IWordService wordService)
         {
             base.Construct(progressService);
+            _wordService = wordService;
         }
 
         protected override void SubscribeUpdates()
         {
-            // Progress.worldData.collectedLoot.Changed += UpdateTitleText;
+            base.SubscribeUpdates();
+            _wordService.SubscribeUpdates();
         }
 
         protected override void UnSubscribeUpdates()
         {
             base.UnSubscribeUpdates();
-            // Progress.worldData.collectedLoot.Changed -= UpdateTitleText;
+            _wordService.UnSubscribeUpdates();
         }
     }
 }

@@ -48,7 +48,7 @@ namespace CodeBase.Infrastructure.StateMachine
             IAssetProvider assetProvider = _serviceLocator.RegisterSingleInstance<IAssetProvider>(new AssetProvider());
             IProgressService progressService = _serviceLocator.RegisterSingleInstance<IProgressService>(new ProgressService());
             
-            IWordService wordService = RegisterWordService();
+            IWordService wordService = _serviceLocator.RegisterSingleInstance<IWordService>(new WordService(new WordProvider()));
                 
             IUIFactory uiFactory = _serviceLocator.RegisterSingleInstance<IUIFactory>(new UIFactory(
                 assetProvider,
@@ -72,13 +72,6 @@ namespace CodeBase.Infrastructure.StateMachine
                 progressService, 
                 gameFactory
             ));
-        }
-
-        private IWordService RegisterWordService()
-        {
-            IWordService wordService = new WordService(new WordProvider());
-            wordService.Init();
-            return _serviceLocator.RegisterSingleInstance<IWordService>(wordService);
         }
 
         private IAdService RegisterAdService()

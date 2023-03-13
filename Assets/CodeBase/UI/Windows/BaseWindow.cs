@@ -23,7 +23,12 @@ namespace CodeBase.UI.Windows
         protected virtual void OnAwake()
         {
             if (_closeButton != null)
-                _closeButton.onClick.AddListener(() => Destroy(gameObject));
+                _closeButton.onClick.AddListener(Hide);
+        }
+
+        protected void Hide()
+        {
+            Destroy(gameObject);
         }
 
         private void Start()
