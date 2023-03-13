@@ -6,25 +6,47 @@ namespace CodeBase.Services.Words
 {
     public class WordService : IWordService
     {
-        public WordService()
-        {
-            
-        }
+        private readonly WordProvider _wordProvider;
         
+        // private Dictionary<string, WordData> _words = new Dictionary<string, WordData>();
+
+        public WordService(WordProvider wordProvider)
+        {
+            _wordProvider = wordProvider;
+        }
+
+        public void Init()
+        {
+            _wordProvider.Init(this);
+        }
+
+        // public void Save(string data)
+        // {
+        //     if (String.IsNullOrEmpty(data))
+        //         return;
+        //     
+        //     // File.WriteAllText(AssetPath.WordsDataPath, data);
+        // }
+
         public Dictionary<string, WordData> Load()
         {
-            // var prefab = Resources.Load<GameObject>(path);
-            // return Object.Instantiate(prefab);
-            
             return null;
         }
-            
-        public void Save(string data)
+
+        public bool TryAdd(WordData word)
         {
-            if (String.IsNullOrEmpty(data))
-                return;
-            
-            // File.WriteAllText(AssetPath.WordsDataPath, data);
+            if (_wordProvider.Words.TryAdd(word.word, word))
+            {
+                _wordProvider.Save();
+                return true;
+            }
+            else 
+                return false;
+        }
+
+        public List<WordData> GetWords()
+        {
+            return null;
         }
     }
 

@@ -65,7 +65,7 @@ public class PlayerPrefsViewer : EditorWindow
         {
 
             EditorGUILayout.Space();
-            GUILayout.Label("Add To Overview", EditorStyles.boldLabel);
+            GUILayout.Label("TryAdd To Overview", EditorStyles.boldLabel);
             prefsOverviewName = EditorGUILayout.TextField("PlayerPref Name", prefsOverviewName);
             GUILayout.BeginHorizontal();
             GUILayout.Label("Type");
@@ -138,8 +138,8 @@ public class PlayerPrefsViewer : EditorWindow
                 prefOverviewTypeIndex = 0;
                 prefsOverviewName = "";
             }
-            //Add to Overview
-            if (GUILayout.Button("Add To Overview"))
+            //TryAdd to Overview
+            if (GUILayout.Button("TryAdd To Overview"))
             {
                 if (prefOverviewTypeIndex == 0 && !(prefsOverviewName.Contains(","))) //Item to add is a string and doesn't contain commas
                 {

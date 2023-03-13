@@ -1,8 +1,5 @@
 ﻿using System;
-using System.IO;
-using CodeBase.Data;
 using CodeBase.Data.Words;
-using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Services.Progress;
 using CodeBase.Services.Words;
 using TMPro;
@@ -30,10 +27,10 @@ namespace CodeBase.UI.Windows.Main
         protected override void OnAwake()
         {
             base.OnAwake();
-            _addWordButton.onClick.AddListener(SaveWord);
+            _addWordButton.onClick.AddListener(AddWord);
         }
 
-        private void SaveWord()
+        private void AddWord()
         {
             if (String.IsNullOrEmpty(_word.text)) 
                 return;
@@ -45,10 +42,14 @@ namespace CodeBase.UI.Windows.Main
                 _wordTextSpeech.text
             );
 
-            Words words = new Words();
-            words.items.Add(word);
-
-            // _wordService.Save();
+            if (_wordService.TryAdd(word))
+            {
+                //
+            }
+            else
+            {
+                // Popup then word exist, 
+            }
 
         }
 
