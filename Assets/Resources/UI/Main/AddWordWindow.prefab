@@ -173,7 +173,7 @@ MonoBehaviour:
   _closeButton: {fileID: 788876479719869289}
   _addWordButton: {fileID: 4735816944754889615}
   _word: {fileID: 5529444480035095891}
-  _wordTraslation: {fileID: 614733968041222633}
+  _wordTranslation: {fileID: 614733968041222633}
   _wordTranscription: {fileID: 6868403508612038384}
   _wordTextSpeech: {fileID: 6974698772718288482}
 --- !u!1 &788876480940145417

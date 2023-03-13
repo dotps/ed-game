@@ -5,6 +5,7 @@ using CodeBase.Services.Factory;
 using CodeBase.Services.Input;
 using CodeBase.Services.Progress;
 using CodeBase.Services.SaveLoad;
+using CodeBase.Services.Words;
 using CodeBase.StaticData;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
@@ -46,12 +47,14 @@ namespace CodeBase.Infrastructure.StateMachine
             
             IAssetProvider assetProvider = _serviceLocator.RegisterSingleInstance<IAssetProvider>(new AssetProvider());
             IProgressService progressService = _serviceLocator.RegisterSingleInstance<IProgressService>(new ProgressService());
+            IWordService wordService = _serviceLocator.RegisterSingleInstance<IWordService>(new WordService());
             
             IUIFactory uiFactory = _serviceLocator.RegisterSingleInstance<IUIFactory>(new UIFactory(
                 assetProvider,
                 staticData,
                 progressService, 
-                adService
+                adService,
+                wordService
             ));
 
             IWindowService windowService = _serviceLocator.RegisterSingleInstance<IWindowService>(new WindowService(uiFactory));

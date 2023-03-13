@@ -2,6 +2,7 @@ using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Services;
 using CodeBase.Services.Ad;
 using CodeBase.Services.Progress;
+using CodeBase.Services.Words;
 using CodeBase.StaticData;
 using CodeBase.StaticData.Windows;
 using CodeBase.UI.Elements;
@@ -19,16 +20,18 @@ namespace CodeBase.UI.Services.Factory
         private readonly IStaticDataService _staticData;
         private readonly IProgressService _progressService;
         private readonly IAdService _adService;
+        private readonly IWordService _wordService;
         private IWindowService _windowService;
 
         private Transform _ui;
 
-        public UIFactory(IAssetProvider assets, IStaticDataService staticData, IProgressService progressService, IAdService adService)
+        public UIFactory(IAssetProvider assets, IStaticDataService staticData, IProgressService progressService, IAdService adService, IWordService wordService)
         {
             _assets = assets;
             _staticData = staticData;
             _progressService = progressService;
             _adService = adService;
+            _wordService = wordService;
         }
 
         public void CreateShop()
@@ -63,7 +66,7 @@ namespace CodeBase.UI.Services.Factory
         {
             WindowConfig config = _staticData.GetWindowConfig(WindowId.AddWord);
             AddWordWindow window = Object.Instantiate(config.prefab, _ui) as AddWordWindow;
-            window.Construct(_progressService);
+            window.Construct(_progressService, _wordService);
             
             InitOpenWindowButton(window);
         }

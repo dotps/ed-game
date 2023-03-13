@@ -1,4 +1,10 @@
-﻿using CodeBase.Services.Progress;
+﻿using System;
+using System.IO;
+using CodeBase.Data;
+using CodeBase.Data.Words;
+using CodeBase.Infrastructure.AssetManagement;
+using CodeBase.Services.Progress;
+using CodeBase.Services.Words;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,13 +15,16 @@ namespace CodeBase.UI.Windows.Main
     {
         [SerializeField] private Button _addWordButton;
         [SerializeField] private TMP_InputField _word;
-        [SerializeField] private TMP_InputField _wordTraslation;
+        [SerializeField] private TMP_InputField _wordTranslation;
         [SerializeField] private TMP_InputField _wordTranscription;
         [SerializeField] private TMP_InputField _wordTextSpeech;
         
-        public void Construct(IProgressService progressService)
+        private IWordService _wordService;
+
+        public void Construct(IProgressService progressService, IWordService wordService)
         {
             base.Construct(progressService);
+            _wordService = wordService;
         }
 
         protected override void OnAwake()
@@ -26,7 +35,21 @@ namespace CodeBase.UI.Windows.Main
 
         private void SaveWord()
         {
-            Debug.Log(_word.text);
+            if (String.IsNullOrEmpty(_word.text)) 
+                return;
+            
+            WordData word = new WordData(
+                _word.text,
+                _wordTranslation.text,
+                _wordTranscription.text,
+                _wordTextSpeech.text
+            );
+
+            Words words = new Words();
+            words.items.Add(word);
+
+            // _wordService.Save();
+
         }
 
         protected override void SubscribeUpdates()
