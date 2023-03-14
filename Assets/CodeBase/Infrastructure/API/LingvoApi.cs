@@ -3,6 +3,13 @@ using System.Threading.Tasks;
 
 namespace CodeBase.Infrastructure.API
 {
+    /* Json Serilization
+     * Используется пакет для серилизации json com.unity.nuget.newtonsoft-json (официально поддерживаается unity)
+     *
+     * https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Install-official-via-UPM
+     * 
+     */
+    
     class LingvoApi : Api
     {
         private const string ApiKey = "ZGViYzU4NjUtMTMxNy00YWI3LWI4Y2ItZDZjYTdiM2EzZDk2OmNkODM2NWVkNTNkNzQ1Mjc5YWMxY2Y2NGRmNTYyYjdj";

@@ -14,7 +14,6 @@ using CodeBase.Services.Words;
 using CodeBase.StaticData;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
-using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -93,6 +92,8 @@ namespace CodeBase.Infrastructure.StateMachine
             // var api = new LingvoApi();
             // var result = await api.Get<User>("https://jsonplaceholder.typicode.com/todos/1");
             // Debug.Log(result.title);
+            
+            
             
             var api = new LingvoApi();
             var result = await api.Get<LingvoTranslate>("https://developers.lingvolive.com/api/v1/Translation?text=plum&srcLang=1033&dstLang=1049");
