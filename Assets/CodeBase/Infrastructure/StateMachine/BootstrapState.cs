@@ -1,4 +1,6 @@
-﻿using CodeBase.Data;
+﻿using System;
+using System.Threading.Tasks;
+using CodeBase.Data;
 using CodeBase.Infrastructure.API;
 using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Services;
@@ -40,55 +42,17 @@ namespace CodeBase.Infrastructure.StateMachine
         private void EnterLoadLevel() => 
             _stateMachine.Enter<LoadProgressState>();
 
-        private async void RegisterServices()
+        private void RegisterServices()
         {
-            // StartCoroutine(GetRequest("https://jsonplaceholder.typicode.com/posts", (UnityWebRequest req) =>
-            // {
-            //     if (req.isNetworkError || req.isHttpError)
-            //     {
-            //         Debug.Log($"{req.error}: {req.downloadHandler.text}");
-            //     } else
-            //     {
-            //         Post[] posts = JsonConvert.DeserializeObject<Post[]>(req.downloadHandler.text);
-            //
-            //         foreach(Post post in posts)
-            //         {
-            //             Debug.Log(post.title);
-            //         }
-            //     }
-            // }));
-
-            // var request;
-            // Api.Get("https://www.teploprofi.com", (UnityWebRequest req) =>
-            // {
-            //     if (req.isNetworkError || req.isHttpError)
-            //         Debug.Log($"{req.error}: {req.downloadHandler.text}");
-            //     else
-            //     {
-            //         Debug.Log("++++");
-            //         // Post[] posts = JsonConvert.DeserializeObject<Post[]>(req.downloadHandler.text);
-            //         //
-            //         // foreach(Post post in posts)
-            //         // {
-            //         //     Debug.Log(post.title);
-            //         // }
-            //     }
-            // });
-
-            // var api = new Api();
-            // var result = await api.Get<LootData>("https://www.teploprofi.com");
-            // var result = await api.Get<User>("https://jsonplaceholder.typicode.com/todos/1");
-            
-            // Debug.Log(result);
-            // Debug.Log(result.Title);
-            
-            // Debug.Log(api.Get<LootData>("https://www.teploprofi.com").Result);
-            
-            // UnityWebRequestAsyncOperation asyncOperation;
-            // asyncOperation = UnityWebRequest.Get("myurl.com").SendWebRequest();
+            GetRequest();
             
             IStaticDataService staticData = RegisterStaticDataService();
-            IAdService adService = RegisterAdService();
+            
+            /*
+             *  AdService отключен ибо ошибки
+             */
+            // IAdService adService = RegisterAdService();
+            IAdService adService = new AdService();
             
             _serviceLocator.RegisterSingleInstance<IGameStateMachine>(_stateMachine);
             _serviceLocator.RegisterSingleInstance<IInputService>(GetInputService());
@@ -122,6 +86,16 @@ namespace CodeBase.Infrastructure.StateMachine
             ));
         }
 
+        private async void GetRequest()
+        {
+            // var api = new LingvoApi();
+            // var result = await api.Get<User>("https://jsonplaceholder.typicode.com/todos/1");
+            // Debug.Log(result.title);
+            
+            var api = new LingvoApi();
+            var result2 = await api.Get<Lingvo>("https://developers.lingvolive.com/api/v1/Translation?text=plum&srcLang=1033&dstLang=1049");
+        }
+
         private IAdService RegisterAdService()
         {
             var adService = new AdService();
@@ -152,9 +126,24 @@ namespace CodeBase.Infrastructure.StateMachine
     
     // public class User
     // {
-    //     public int UserId { get; set; }
-    //     public int Id { get; set; }
-    //     public string Title { get; set; }
-    //     public bool Completed { get; set; }
+    //     public int userId { get; set; }
+    //     public int id { get; set; }
+    //     public string title { get; set; }
+    //     public bool completed { get; set; }
     // }
+    
+    [Serializable]
+    public class User
+    {
+        public int userId;
+        public int id;
+        public string title;
+        public bool completed;
+    }
+    
+    [Serializable]
+    public class Lingvo
+    {
+        public string Title;
+    }
 }
