@@ -38,10 +38,9 @@ namespace CodeBase.Infrastructure.API
                 Debug.Log(request.downloadHandler.text);
                 var json = "{'Translate':" + request.downloadHandler.text + "}";
                 
-                // var result = JsonUtility.FromJson<TResultType>(json);
-                var result = JsonConvert.DeserializeObject<TResultType>(json);
+                // JsonUtility.FromJson<TResultType>(json);
+                return JsonConvert.DeserializeObject<TResultType>(json);
 
-                return result;
             }
             catch (Exception error)
             {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -5,9 +6,7 @@ namespace CodeBase.Infrastructure.API
 {
     /* Json Serilization
      * Используется пакет для серилизации json com.unity.nuget.newtonsoft-json (официально поддерживаается unity)
-     *
      * https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Install-official-via-UPM
-     * 
      */
     
     class LingvoApi : Api
@@ -19,25 +18,20 @@ namespace CodeBase.Infrastructure.API
         
 
         /*
-         * TODO: Пока работает с указанием токена в конмтанте, но нужно запрашивать токен 
+         * TODO: Пока работает с указанием токена в конcтанте, но нужно запрашивать токен 
          */
-        public async void GetToken()
-        {
-            // string token = await GetRequest<string>(Host + CmdAuth);
-        }
+        // public async void GetToken()
+        // {
+        //     // string token = await GetRequest<string>(Host + CmdAuth);
+        // }
         
         public async Task<TResultType> Get<TResultType>(string url)
         {
             return await GetRequest<TResultType>(url, Token);
         }
-        
-        // public async Task<TResultType> Get<TResultType>(string url, string token)
-        // {
-        //     return await GetRequest<TResultType>(url, token);
-        // }
     }
     
-    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+    [Serializable]
     public class Body
     {
         public List<Markup> Markup { get; set; }
@@ -48,6 +42,7 @@ namespace CodeBase.Infrastructure.API
         public List<Item> Items { get; set; }
     }
 
+    [Serializable]
     public class Item
     {
         public List<Markup> Markup { get; set; }
@@ -56,6 +51,7 @@ namespace CodeBase.Infrastructure.API
         public bool IsOptional { get; set; }
     }
 
+    [Serializable]
     public class Markup
     {
         public string Node { get; set; }
@@ -72,11 +68,13 @@ namespace CodeBase.Infrastructure.API
         public List<Item> Items { get; set; }
     }
 
+    [Serializable]
     public class LingvoTranslate
     {
         public List<Translate> Translate { get; set; }
     }
 
+    [Serializable]
     public class TitleMarkup
     {
         public bool IsItalics { get; set; }
@@ -86,6 +84,7 @@ namespace CodeBase.Infrastructure.API
         public bool IsOptional { get; set; }
     }
 
+    [Serializable]
     public class Translate
     {
         public string Title { get; set; }
@@ -94,9 +93,5 @@ namespace CodeBase.Infrastructure.API
         public string ArticleId { get; set; }
         public List<Body> Body { get; set; }
     }
-
-
-
-
     
 }
