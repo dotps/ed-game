@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -35,14 +36,16 @@ namespace CodeBase.Infrastructure.API
                     Debug.LogError($"Failed: {request.error}");
 
                 Debug.Log(request.downloadHandler.text);
+                var json = "{'Translate':" + request.downloadHandler.text + "}";
                 
-                var result = JsonUtility.FromJson<TResultType>(request.downloadHandler.text);
+                // var result = JsonUtility.FromJson<TResultType>(json);
+                var result = JsonConvert.DeserializeObject<TResultType>(json);
 
                 return result;
             }
-            catch (Exception ex)
+            catch (Exception error)
             {
-                Debug.LogError($"{nameof(GetRequest)} failed: {ex.Message}");
+                Debug.LogError($"{nameof(GetRequest)} failed: {error.Message}");
                 return default;
             }
         }

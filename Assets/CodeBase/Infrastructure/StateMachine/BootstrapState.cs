@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeBase.Data;
 using CodeBase.Infrastructure.API;
@@ -13,6 +14,7 @@ using CodeBase.Services.Words;
 using CodeBase.StaticData;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -93,7 +95,8 @@ namespace CodeBase.Infrastructure.StateMachine
             // Debug.Log(result.title);
             
             var api = new LingvoApi();
-            var result2 = await api.Get<Lingvo>("https://developers.lingvolive.com/api/v1/Translation?text=plum&srcLang=1033&dstLang=1049");
+            var result = await api.Get<LingvoTranslate>("https://developers.lingvolive.com/api/v1/Translation?text=plum&srcLang=1033&dstLang=1049");
+            Debug.Log(result.Translate[0].Title);
         }
 
         private IAdService RegisterAdService()
@@ -122,28 +125,5 @@ namespace CodeBase.Infrastructure.StateMachine
             else
                 return new MobileInputService();
         }
-    }
-    
-    // public class User
-    // {
-    //     public int userId { get; set; }
-    //     public int id { get; set; }
-    //     public string title { get; set; }
-    //     public bool completed { get; set; }
-    // }
-    
-    [Serializable]
-    public class User
-    {
-        public int userId;
-        public int id;
-        public string title;
-        public bool completed;
-    }
-    
-    [Serializable]
-    public class Lingvo
-    {
-        public string Title;
     }
 }

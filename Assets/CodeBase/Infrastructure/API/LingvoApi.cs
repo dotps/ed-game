@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CodeBase.Infrastructure.API
@@ -28,4 +29,67 @@ namespace CodeBase.Infrastructure.API
         //     return await GetRequest<TResultType>(url, token);
         // }
     }
+    
+    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+    public class Body
+    {
+        public List<Markup> Markup { get; set; }
+        public string Node { get; set; }
+        public object Text { get; set; }
+        public bool IsOptional { get; set; }
+        public int? Type { get; set; }
+        public List<Item> Items { get; set; }
+    }
+
+    public class Item
+    {
+        public List<Markup> Markup { get; set; }
+        public string Node { get; set; }
+        public object Text { get; set; }
+        public bool IsOptional { get; set; }
+    }
+
+    public class Markup
+    {
+        public string Node { get; set; }
+        public string Text { get; set; }
+        public bool IsOptional { get; set; }
+        public bool? IsItalics { get; set; }
+        public bool? IsAccent { get; set; }
+        public string FullText { get; set; }
+        public string FileName { get; set; }
+        public List<Markup> markup { get; set; }
+        public string Dictionary { get; set; }
+        public string ArticleId { get; set; }
+        public int? Type { get; set; }
+        public List<Item> Items { get; set; }
+    }
+
+    public class LingvoTranslate
+    {
+        public List<Translate> Translate { get; set; }
+    }
+
+    public class TitleMarkup
+    {
+        public bool IsItalics { get; set; }
+        public bool IsAccent { get; set; }
+        public string Node { get; set; }
+        public string Text { get; set; }
+        public bool IsOptional { get; set; }
+    }
+
+    public class Translate
+    {
+        public string Title { get; set; }
+        public List<TitleMarkup> TitleMarkup { get; set; }
+        public string Dictionary { get; set; }
+        public string ArticleId { get; set; }
+        public List<Body> Body { get; set; }
+    }
+
+
+
+
+    
 }
