@@ -1,4 +1,6 @@
-﻿using CodeBase.Infrastructure.AssetManagement;
+﻿using CodeBase.Data;
+using CodeBase.Infrastructure.API;
+using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Services;
 using CodeBase.Services.Ad;
 using CodeBase.Services.Factory;
@@ -10,6 +12,7 @@ using CodeBase.StaticData;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace CodeBase.Infrastructure.StateMachine
 {
@@ -37,8 +40,53 @@ namespace CodeBase.Infrastructure.StateMachine
         private void EnterLoadLevel() => 
             _stateMachine.Enter<LoadProgressState>();
 
-        private void RegisterServices()
+        private async void RegisterServices()
         {
+            // StartCoroutine(GetRequest("https://jsonplaceholder.typicode.com/posts", (UnityWebRequest req) =>
+            // {
+            //     if (req.isNetworkError || req.isHttpError)
+            //     {
+            //         Debug.Log($"{req.error}: {req.downloadHandler.text}");
+            //     } else
+            //     {
+            //         Post[] posts = JsonConvert.DeserializeObject<Post[]>(req.downloadHandler.text);
+            //
+            //         foreach(Post post in posts)
+            //         {
+            //             Debug.Log(post.title);
+            //         }
+            //     }
+            // }));
+
+            // var request;
+            // Api.Get("https://www.teploprofi.com", (UnityWebRequest req) =>
+            // {
+            //     if (req.isNetworkError || req.isHttpError)
+            //         Debug.Log($"{req.error}: {req.downloadHandler.text}");
+            //     else
+            //     {
+            //         Debug.Log("++++");
+            //         // Post[] posts = JsonConvert.DeserializeObject<Post[]>(req.downloadHandler.text);
+            //         //
+            //         // foreach(Post post in posts)
+            //         // {
+            //         //     Debug.Log(post.title);
+            //         // }
+            //     }
+            // });
+
+            // var api = new Api();
+            // var result = await api.Get<LootData>("https://www.teploprofi.com");
+            // var result = await api.Get<User>("https://jsonplaceholder.typicode.com/todos/1");
+            
+            // Debug.Log(result);
+            // Debug.Log(result.Title);
+            
+            // Debug.Log(api.Get<LootData>("https://www.teploprofi.com").Result);
+            
+            // UnityWebRequestAsyncOperation asyncOperation;
+            // asyncOperation = UnityWebRequest.Get("myurl.com").SendWebRequest();
+            
             IStaticDataService staticData = RegisterStaticDataService();
             IAdService adService = RegisterAdService();
             
@@ -101,4 +149,12 @@ namespace CodeBase.Infrastructure.StateMachine
                 return new MobileInputService();
         }
     }
+    
+    // public class User
+    // {
+    //     public int UserId { get; set; }
+    //     public int Id { get; set; }
+    //     public string Title { get; set; }
+    //     public bool Completed { get; set; }
+    // }
 }
