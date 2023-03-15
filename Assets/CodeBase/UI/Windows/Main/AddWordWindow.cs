@@ -12,10 +12,14 @@ namespace CodeBase.UI.Windows.Main
     public class AddWordWindow : BaseWindow
     {
         [SerializeField] private Button _addWordButton;
-        [SerializeField] private TMP_InputField _word;
-        [SerializeField] private TMP_InputField _wordTranslation;
-        [SerializeField] private TMP_InputField _wordTranscription;
-        [SerializeField] private TMP_InputField _wordTextSpeech;
+        [SerializeField] private InputField _word;
+        [SerializeField] private InputField _wordTranslation;
+        [SerializeField] private InputField _wordTranscription;
+        [SerializeField] private InputField _wordTextSpeech;
+        // [SerializeField] private TMP_InputField _word;
+        // [SerializeField] private TMP_InputField _wordTranslation;
+        // [SerializeField] private TMP_InputField _wordTranscription;
+        // [SerializeField] private TMP_InputField _wordTextSpeech;
         
         private IWordService _wordService;
 
