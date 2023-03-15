@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using CodeBase.Data;
-using CodeBase.Infrastructure.API;
-using CodeBase.Infrastructure.AssetManagement;
+﻿using CodeBase.Infrastructure.AssetManagement;
 using CodeBase.Services;
 using CodeBase.Services.Ad;
 using CodeBase.Services.Factory;
 using CodeBase.Services.Input;
 using CodeBase.Services.Progress;
 using CodeBase.Services.SaveLoad;
+using CodeBase.Services.Translate;
 using CodeBase.Services.Words;
 using CodeBase.StaticData;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
 using Newtonsoft.Json;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace CodeBase.Infrastructure.StateMachine
 {
@@ -46,24 +41,27 @@ namespace CodeBase.Infrastructure.StateMachine
 
         private void RegisterServices()
         {
-            GetRequest();
-            
             IStaticDataService staticData = RegisterStaticDataService();
-            
+
             /*
              *  AdService отключен ибо ошибки
              */
             // IAdService adService = RegisterAdService();
             IAdService adService = new AdService();
-            
+
             _serviceLocator.RegisterSingleInstance<IGameStateMachine>(_stateMachine);
             _serviceLocator.RegisterSingleInstance<IInputService>(GetInputService());
-            
+
             IAssetProvider assetProvider = _serviceLocator.RegisterSingleInstance<IAssetProvider>(new AssetProvider());
             IProgressService progressService = _serviceLocator.RegisterSingleInstance<IProgressService>(new ProgressService());
+
+            ITranslateService translateService = _serviceLocator.RegisterSingleInstance<ITranslateService>(new LingvoTranslateService());
+            IWordService wordService = _serviceLocator.RegisterSingleInstance<IWordService>(
+                new WordService(new WordProvider(), translateService)
+            );
+
+            GetRequest(translateService);
             
-            IWordService wordService = _serviceLocator.RegisterSingleInstance<IWordService>(new WordService(new WordProvider()));
-                
             IUIFactory uiFactory = _serviceLocator.RegisterSingleInstance<IUIFactory>(new UIFactory(
                 assetProvider,
                 staticData,
@@ -88,17 +86,10 @@ namespace CodeBase.Infrastructure.StateMachine
             ));
         }
 
-        private async void GetRequest()
+        private async void GetRequest(ITranslateService translateService)
         {
-            // var api = new LingvoApi();
-            // var result = await api.Get<User>("https://jsonplaceholder.typicode.com/todos/1");
-            // Debug.Log(result.title);
-            
-            
-            
-            var api = new LingvoApi();
-            var translate = await api.Get<LingvoTranslate>("https://developers.lingvolive.com/api/v1/Translation?text=plum&srcLang=1033&dstLang=1049");
-            var minicard = await api.Get<LingvoMinicard>("https://developers.lingvolive.com/api/v1/Minicard?text=plum&srcLang=1033&dstLang=1049");
+            var translate = await translateService.Get<LingvoTranslate>("https://developers.lingvolive.com/api/v1/Translation?text=plum&srcLang=1033&dstLang=1049");
+            var minicard = await translateService.Get<LingvoMinicard>("https://developers.lingvolive.com/api/v1/Minicard?text=plum&srcLang=1033&dstLang=1049");
             Debug.Log(translate.lingvoTranslate[0].Title);
             Debug.Log(minicard.Translation.translation);
             Debug.Log(JsonConvert.SerializeObject(minicard));

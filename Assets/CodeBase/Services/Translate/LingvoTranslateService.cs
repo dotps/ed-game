@@ -1,24 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CodeBase.Infrastructure.API;
 using Newtonsoft.Json;
-using UnityEngine;
 
-namespace CodeBase.Infrastructure.API
+namespace CodeBase.Services.Translate
 {
     /* Json Serilization
      * Используется пакет для серилизации json com.unity.nuget.newtonsoft-json (официально поддерживаается unity)
      * https://github.com/jilleJr/Newtonsoft.Json-for-Unity/wiki/Install-official-via-UPM
      */
     
-    class LingvoApi : Api
+    class LingvoTranslateService : Api, ITranslateService
     {
         private const string ApiKey = "ZGViYzU4NjUtMTMxNy00YWI3LWI4Y2ItZDZjYTdiM2EzZDk2OmNkODM2NWVkNTNkNzQ1Mjc5YWMxY2Y2NGRmNTYyYjdj";
         private const string Token = "ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmxlSEFpT2pFMk56ZzROamt5TXpnc0lrMXZaR1ZzSWpwN0lrTm9ZWEpoWTNSbGNuTlFaWEpFWVhraU9qVXdNREF3TENKVmMyVnlTV1FpT2pnMU56a3NJbFZ1YVhGMVpVbGtJam9pWkdWaVl6VTROalV0TVRNeE55MDBZV0kzTFdJNFkySXRaRFpqWVRkaU0yRXpaRGsySW4xOS5lN0lFWnVpQzlhTTQ3WjY3SnpTQW0xOU5LdW9sZ2ZJV3BwSzA4eTZBRV9z";
         private const string Host = "https://developers.lingvolive.com/api/";
         private const string CmdAuth = "v1.1/authenticate";
         
-
         /*
          * TODO: Пока работает с указанием токена в конcтанте, но нужно запрашивать токен 
          */
@@ -40,9 +39,6 @@ namespace CodeBase.Infrastructure.API
                 string json = JsonArrayToObject<TResultType>(result);
                 return JsonConvert.DeserializeObject<TResultType>(json);
             }
-
-            // string json = "{'Translate':" + result + "}";
-            // return JsonConvert.DeserializeObject<TResultType>(json);
         }
 
         private static string JsonArrayToObject<TResultType>(string result)

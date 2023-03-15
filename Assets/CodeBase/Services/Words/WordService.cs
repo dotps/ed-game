@@ -2,16 +2,20 @@ using System;
 using System.Collections.Generic;
 using CodeBase.Data;
 using CodeBase.Data.Words;
+using CodeBase.Infrastructure.API;
+using CodeBase.Services.Translate;
 using UnityEngine;
 
 namespace CodeBase.Services.Words
 {
     public class WordService : IWordService
     {
+        private readonly ITranslateService _translateService;
         private readonly WordProvider _wordProvider;
 
-        public WordService(WordProvider wordProvider)
+        public WordService(WordProvider wordProvider, ITranslateService translateService)
         {
+            _translateService = translateService;
             _wordProvider = new WordProvider();
         }
 

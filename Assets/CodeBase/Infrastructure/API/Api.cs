@@ -33,7 +33,10 @@ namespace CodeBase.Infrastructure.API
                     await Task.Yield();
 
                 if (request.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.Log(url);
                     Debug.LogError($"Failed: {request.error}");
+                }
 
                 return request.downloadHandler.text;
             }
