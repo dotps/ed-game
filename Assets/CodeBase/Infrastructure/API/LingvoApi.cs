@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.API
 {
@@ -27,10 +29,34 @@ namespace CodeBase.Infrastructure.API
         
         public async Task<TResultType> Get<TResultType>(string url)
         {
-            return await GetRequest<TResultType>(url, Token);
+            string result = await GetRequest(url, Token);
+
+            try
+            {
+                return JsonConvert.DeserializeObject<TResultType>(result);
+            }
+            catch 
+            {
+                string json = JsonArrayToObject<TResultType>(result);
+                return JsonConvert.DeserializeObject<TResultType>(json);
+            }
+
+            // string json = "{'Translate':" + result + "}";
+            // return JsonConvert.DeserializeObject<TResultType>(json);
+        }
+
+        private static string JsonArrayToObject<TResultType>(string result)
+        {
+            return "{'" + typeof(TResultType).Name + "':" + result + "}";
         }
     }
-    
+
+    [Serializable]
+    public class LingvoTranslate
+    {
+        public List<Translate> lingvoTranslate { get; set; }
+    }
+
     [Serializable]
     public class Body
     {
@@ -69,12 +95,6 @@ namespace CodeBase.Infrastructure.API
     }
 
     [Serializable]
-    public class LingvoTranslate
-    {
-        public List<Translate> Translate { get; set; }
-    }
-
-    [Serializable]
     public class TitleMarkup
     {
         public bool IsItalics { get; set; }
@@ -92,6 +112,27 @@ namespace CodeBase.Infrastructure.API
         public string Dictionary { get; set; }
         public string ArticleId { get; set; }
         public List<Body> Body { get; set; }
+    }
+    
+    [Serializable]
+    public class LingvoMinicard
+    {
+        public int SourceLanguage { get; set; }
+        public int TargetLanguage { get; set; }
+        public string Heading { get; set; }
+        public Translation Translation { get; set; }
+        public List<object> SeeAlso { get; set; }
+    }
+
+    [Serializable]
+    public class Translation
+    {
+        public string Heading { get; set; }
+        public string translation { get; set; }
+        public string DictionaryName { get; set; }
+        public string SoundName { get; set; }
+        public int Type { get; set; }
+        public string OriginalWord { get; set; }
     }
     
 }

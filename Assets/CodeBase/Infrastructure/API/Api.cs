@@ -16,7 +16,7 @@ namespace CodeBase.Infrastructure.API
     {
         private const string ContentTypeJson = "application/json";
 
-        public async Task<TResultType> GetRequest<TResultType>(string url, string token = null)
+        public async Task<string> GetRequest(string url, string token = null)
         {
             try
             {
@@ -35,18 +35,14 @@ namespace CodeBase.Infrastructure.API
                 if (request.result != UnityWebRequest.Result.Success)
                     Debug.LogError($"Failed: {request.error}");
 
-                Debug.Log(request.downloadHandler.text);
-                var json = "{'Translate':" + request.downloadHandler.text + "}";
-                
-                // JsonUtility.FromJson<TResultType>(json);
-                return JsonConvert.DeserializeObject<TResultType>(json);
-
+                return request.downloadHandler.text;
             }
-            catch (Exception error)
+            catch(Exception error)
             {
                 Debug.LogError($"{nameof(GetRequest)} failed: {error.Message}");
                 return default;
             }
         }
+        // public async Task<TResultType> GetRequest<TResultType>(string url, string token = null)
     }
 }

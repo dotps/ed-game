@@ -14,6 +14,7 @@ using CodeBase.Services.Words;
 using CodeBase.StaticData;
 using CodeBase.UI.Services.Factory;
 using CodeBase.UI.Services.Windows;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -96,8 +97,11 @@ namespace CodeBase.Infrastructure.StateMachine
             
             
             var api = new LingvoApi();
-            var result = await api.Get<LingvoTranslate>("https://developers.lingvolive.com/api/v1/Translation?text=plum&srcLang=1033&dstLang=1049");
-            Debug.Log(result.Translate[0].Title);
+            var translate = await api.Get<LingvoTranslate>("https://developers.lingvolive.com/api/v1/Translation?text=plum&srcLang=1033&dstLang=1049");
+            var minicard = await api.Get<LingvoMinicard>("https://developers.lingvolive.com/api/v1/Minicard?text=plum&srcLang=1033&dstLang=1049");
+            Debug.Log(translate.lingvoTranslate[0].Title);
+            Debug.Log(minicard.Translation.translation);
+            Debug.Log(JsonConvert.SerializeObject(minicard));
         }
 
         private IAdService RegisterAdService()
