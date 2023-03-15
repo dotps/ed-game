@@ -88,7 +88,7 @@ namespace CodeBase.Infrastructure.StateMachine
 
         private async void GetRequest(ITranslateService translateService)
         {
-            var translate = await translateService.Get<LingvoTranslate>("https://developers.lingvolive.com/api/v1/Translation?text=plum&srcLang=1033&dstLang=1049");
+            LingvoTranslate translate = await translateService.Get<LingvoTranslate>("https://developers.lingvolive.com/api/v1/Translation?text=plum&srcLang=1033&dstLang=1049");
             var minicard = await translateService.Get<LingvoMinicard>("https://developers.lingvolive.com/api/v1/Minicard?text=plum&srcLang=1033&dstLang=1049");
             Debug.Log(translate.lingvoTranslate[0].Title);
             Debug.Log(minicard.Translation.translation);

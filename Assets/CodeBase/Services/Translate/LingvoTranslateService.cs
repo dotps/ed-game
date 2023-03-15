@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeBase.Infrastructure.API;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace CodeBase.Services.Translate
 {
@@ -29,6 +30,14 @@ namespace CodeBase.Services.Translate
         public async Task<TResultType> Get<TResultType>(string url)
         {
             string result = await GetRequest(url, Token);
+
+            Debug.Log(result);
+            
+            if (String.IsNullOrEmpty(result))
+            {
+                Debug.Log("++++++++++++++");
+                return default(TResultType);
+            }
 
             try
             {

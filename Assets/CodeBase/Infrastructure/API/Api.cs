@@ -34,8 +34,8 @@ namespace CodeBase.Infrastructure.API
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.Log(url);
-                    Debug.LogError($"Failed: {request.error}");
+                    Debug.Log($"Failed: {request.error}");
+                    return null;
                 }
 
                 return request.downloadHandler.text;
